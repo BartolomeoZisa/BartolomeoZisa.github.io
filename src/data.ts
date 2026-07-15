@@ -1,6 +1,10 @@
 import { Project, Game, Publication, SocialLink, Education } from './types';
 import canteenImage from './assets/canteen2.png';
 import llmrefactoringImage from './assets/refactoring.png';
+import digitalHealthImage from './assets/digitalhealth.png';
+import sokobanImage from './assets/sokoban.png';
+import avae from './assets/avae.png';
+import videoGeneratorImage from './assets/video.png';
 
 export const personalInfo = {
   name: 'Bartolomeo Zisa',
@@ -8,9 +12,29 @@ export const personalInfo = {
   university: 'University of Pisa',
   email: 'bartzisa03@gmail.com',
   location: 'Pisa, Italy',
-  bio: `I am a Master's Student in Artificial Intelligence at the University of Pisa and a passionate hobbyist game developer. I am interested in Reinforcement Learning, Generative Deep Learning, and AI for software engineering, in my free time I dabble in indie game development and pixel art creation.`,
+  bio: `I am a Master's Student in Artificial Intelligence at the University of Pisa and a passionate hobbyist game developer. I am interested in Deep Learning, Reinforcement Learning. In my free time I dabble in indie game development and pixel art creation.`,
   avatarUrl: 'https://media.licdn.com/dms/image/v2/D4D03AQF1Q2J5lktyeQ/profile-displayphoto-scale_400_400/B4DZeiVLKgGUAk-/0/1750775149751?e=1785974400&v=beta&t=-uIfaSVxZdS5GFSvxavdzgS2jBZH_9SVcnCneOXsEQ4',
 };
+
+// data.ts
+
+import { Experience } from './types'; // or wherever your types are located
+
+export const experienceHistory: Experience[] = [
+    {
+    role: "Cyberchallenge national finalist ",
+    company: "CyberChallengeIT",
+    period: "2025",
+    description: "Selected among the finalists representing my university's team, reaching 5th place at the national Italian cybersecurity competition. Gained experience web, cryptography, and binary exploitation."
+  },
+  {
+    role: "Certificate of Completion",
+    company: "Samsung Innovation Campus",
+    period: "2024",
+    description: "Completed the Samsung Innovation Campus program, gaining hands-on experience in AI and IoT product development."
+  },
+];
+
 
 export const socialLinks: SocialLink[] = [
   {
@@ -56,13 +80,13 @@ export const educationHistory: Education[] = [
     degree: "M.Sc. in Artificial Intelligence",
     institution: "University of Pisa, Italy",
     period: "2025 - Present",
-    description: "Specializing in Machine Learning, Deep Learning, and traditional AI. Knowledge in Optimization and Parallel Computing, and AI for Software Engineering.",
+    description: "Specializing in Machine Learning, Deep Learning, and traditional AI. Knowledge in Computational Mathematics and Parallel Computing, and AI.",
   },
   {
     degree: "B.Sc. in Computer Science",
     institution: "University of Pisa, Italy",
     period: "2022 - 2025",
-    description: "Solid foundation in theoretical computer science, databases, system programming, algorithms, and software engineering."
+    description: "Graduated with honors, obtaining a solid foundation in theoretical computer science, databases, system programming, algorithms, and software engineering."
   }
 ];
 
@@ -98,6 +122,17 @@ export const projects: Project[] = [
     //stars: 38,
     //forks: 4
   },
+    {
+    id: 'proj-0',
+    title: 'Automated Video Summary Generator',
+    description: 'A end to end tool for video summary generation. Script creation, speech synthesis, image generation and video editing are all automated. (code not public)',
+    tags: ['AI', 'Generative AI', 'Video Editing', 'Python'],
+    githubUrl: 'https://www.youtube.com/channel/UC4fTzoHA1duhozpVoH-dGcw',
+    category: 'Tools',
+    imageUrl: videoGeneratorImage,
+    //stars: 38,
+    //forks: 4
+  },
   {
     id: 'proj-2',
       title: 'SokobanAI',
@@ -105,7 +140,7 @@ export const projects: Project[] = [
     tags: ['Python', 'AI', 'Evolutionary Algorithms', 'Games'],
     githubUrl: 'https://github.com/alebertz/SokobanAI',
     category: 'AI',
-    imageUrl: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=400&auto=format&fit=crop',
+    imageUrl: sokobanImage,
   },
   {
     id: 'proj-3',
@@ -122,9 +157,29 @@ export const projects: Project[] = [
     description: 'Web application for the University of Pisa canteen, calculating best meal tariffs.',
     tags: ['TypeScript', 'React', 'Web Development'],
     githubUrl: '  https://github.com/BartolomeoZisa/Unipi-Canteen-Convenience',
-    category: 'Software Engineering',
+    category: 'Tools',
     imageUrl: canteenImage,
-  },  
+  },
+  {
+    id: 'proj-5',
+      title: 'UCP Patient Mirror Movement Analysis',
+    description: 'Analysis of real patient mirror movement data for patients affected by unilateral cerebral palsy. Includes several AI approaches',
+    tags: ['Digital Health','AI', 'Machine Learning'],
+    githubUrl: 'https://github.com/BartolomeoZisa/digitalHealth',
+    category: 'AI',
+    imageUrl: digitalHealthImage,
+  },
+  {
+    id: 'proj-6',
+      title: 'Generative Deep Learning coursework',
+    description: 'Coursework for the Generative Deep Learning course at the University of Pisa, including CNN, GAN and GMM.',
+    tags: ['Deep Learning', 'Machine Learning'],
+    githubUrl: 'https://github.com/BartolomeoZisa/GDL',
+    category: 'AI',
+    imageUrl: avae,
+  },
+
+  
 
 ];
 
@@ -132,61 +187,61 @@ export const games: Game[] = [
   {
     id: 'game-1',
     title: 'Marta',
-    description: 'A hauntingly beautiful, narrative-driven 2D puzzle adventure game with stunning atmospheric pixel art. Explore a forgotten city to reconstruct memories of the past.',
+    description: 'A graduation visual novel in Italian',
     type: 'Game',
     platform: 'Itch.io',
     platformUrl: 'https://bartholomheow.itch.io/marta',
-    tags: ['Adventure', 'Puzzle', 'Narrative', 'Pixel Art'],
-    imageUrl: 'https://img.itch.zone/aW1nLzIzNTc2NTExLnBuZw==/315x250%23c/6sMk4g.png'
+    tags: ['Visual Novel', 'Narrative', 'Renpy'],
+    imageUrl: 'https://img.itch.zone/aW1nLzI0NDIwNTE5LnBuZw==/315x250%23c/GXqWoQ.png'
   },
   {
     id: 'game-2',
     title: 'Inverted Merge',
-    description: 'A mind-bending spatial puzzle game based on block merging. Moving pieces inverts the color values and physics of adjacent tiles, requiring advanced forward planning.',
+    description: 'A puzzle game. Reconnect with your doppelganger who has inverted controls!',
     type: 'Game',
     platform: 'Itch.io',
     platformUrl: 'https://bartholomheow.itch.io/inverted-merge',
-    tags: ['Puzzle', 'Retro', 'Color Theory', 'Casual'],
-    imageUrl: 'https://img.itch.zone/aW1nLzIwOTIzOTc3LnBuZw==/315x250%23c/SIKAs%2B.png'
+    tags: ['Puzzle'],
+    imageUrl: 'https://img.itch.zone/aW1nLzIzNTc2NTExLnBuZw==/315x250%23c/6sMk4g.png'
   },
   {
     id: 'game-3',
     title: 'Programming Escape',
-    description: 'Escape from a glitchy mainframe! A logic-platformer where players solve short, visual coding nodes and write minor algorithm snippets to activate bridges, open doors, and override system security.',
+    description: 'A programming puzzle game.',
     type: 'Game',
     platform: 'Itch.io',
     platformUrl: 'https://bartholomheow.itch.io/programming-escape',
-    tags: ['Education', 'Coding', 'Platformer', 'Cyberpunk'],
-    imageUrl: 'https://img.itch.zone/aW1nLzIwNjIyMDkzLnBuZw==/315x250%23c/aY%2F36I.png'
+    tags: ['Education', 'Coding', 'Minimalist'],
+    imageUrl: 'https://img.itch.zone/aW1nLzIyNTM2NzkzLnBuZw==/315x250%23c/CM0Wxm.png'
   },
   {
     id: 'game-4',
     title: 'Treant Killer',
-    description: 'An arcade-style action hack-and-slash game. Play as a forest guardian battling rogue tree giants. Survive escalating waves of monsters while harvesting ancient energy rings.',
+    description: 'An arcade-style action game. Play as a forest guardian battling rogue treants.',
     type: 'Game',
-    platform: 'Newgrounds',
-    platformUrl: 'https://bartholomheow.newgrounds.com/',
-    tags: ['Action', 'Survival', 'Hack & Slash', 'Arcade'],
-    imageUrl: '' // Will render beautiful interactive placeholder
+    platform: 'Itch.io',
+    platformUrl: 'https://bartholomheow.itch.io/treant-killer',
+    tags: ['Action', 'Minimalist', 'Arcade'],
+    imageUrl: 'https://img.itch.zone/aW1nLzIwOTIzOTc3LnBuZw==/315x250%23c/SIKAs%2B.png' // Will render beautiful interactive placeholder
   },
   {
     id: 'game-5',
     title: 'Brainrot Destruction',
-    description: 'A humorous, chaotic arcade action game mocking internet meme culture. Dodge endless falling emojis and stream alerts while defending your dopamine indicators from critical decay.',
+    description: 'A chaotic action game where you\'re a submarine fighting italian brainrot.',
     type: 'Game',
     platform: 'Itch.io',
     platformUrl: 'https://bartholomheow.itch.io/brainrot-destruction',
-    tags: ['Action', 'Comedy', 'Meme', 'Fast-Paced'],
-    imageUrl: 'https://img.itch.zone/aW1nLzE3ODQ1NjgzLnBuZw==/315x250%23c/SZ6w9U.png'
+    tags: ['Action', 'Meme'],
+    imageUrl: 'https://img.itch.zone/aW1nLzIwNjIyMDkzLnBuZw==/315x250%23c/aY%2F36I.png'
   },
   {
     id: 'game-6',
-    title: '16bit Elemental Enemies Pack',
-    description: 'A beautifully animated high-quality asset pack containing hand-crafted pixel art characters. Includes idle, attack, run, and death animations for fire, earth, wind, and water golems.',
-    type: 'Asset Pack',
+    title: 'Valdo\'s Adventure ',
+    description: 'A platformer rage game.',
+    type: 'Game',
     platform: 'Itch.io',
-    platformUrl: 'https://bartholomheow.itch.io/16bit-elemental-enemies',
-    tags: ['Asset Pack', 'Pixel Art', 'Game Assets', 'Fantasy'],
-    imageUrl: 'https://img.itch.zone/aW1nLzIyNTM2NzkzLnBuZw==/315x250%23c/CM0Wxm.png'
+    platformUrl: 'https://bartholomheow.itch.io/valdos-adventure',
+    tags: ['Rage game', 'Platformer'],
+    imageUrl: 'https://img.itch.zone/aW1nLzE3ODQ1NjgzLnBuZw==/315x250%23c/SZ6w9U.png'
   }
 ];

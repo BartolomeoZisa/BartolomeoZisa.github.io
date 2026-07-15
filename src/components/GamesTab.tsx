@@ -95,10 +95,10 @@ export default function GamesTab() {
       <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
         <h3 className="text-xl font-bold text-slate-900 tracking-tight flex items-center gap-2">
           <Gamepad2 className="w-6 h-6 text-teal-600 animate-pulse" />
-          Indie Games & Custom Pixel Art Asset Packs
+          Games & Pixel Art
         </h3>
         <p className="text-sm text-slate-500 mt-2 leading-relaxed">
-          I am an avid game designer and retro graphics creator. All of my games are written from scratch—often using customized 2D physics loops and bespoke asset sets. Below are the projects hosted on my <strong className="text-slate-800">Itch.io</strong> page (<a href="https://bartholomheow.itch.io" target="_blank" rel="noreferrer" className="text-teal-600 underline">bartholomheow</a>) and <strong className="text-slate-800">Newgrounds</strong>. Click to play them directly in your web browser!
+          I am an hobbyist game developer and pixel artist. I mainly use Unity, and have partecipated in game jams such as Ludum Dare and GMTK. Below are my projects. Click to play them directly in your web browser!
         </p>
       </div>
 

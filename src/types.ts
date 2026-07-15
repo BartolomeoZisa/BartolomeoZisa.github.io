@@ -11,6 +11,13 @@ export interface Project {
   videoUrl?: string;
 }
 
+export interface Experience {
+  role: string;
+  company: string;
+  period: string;
+  description?: string; // Optional detailed breakdown of key achievements or responsibilities
+}
+
 export interface Game {
   id: string;
   title: string;

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { personalInfo, socialLinks, educationHistory } from '../data';
+import { personalInfo, socialLinks, educationHistory, experienceHistory } from '../data';
 import { 
   MapPin, 
   Mail, 
@@ -10,7 +10,7 @@ import {
   Gamepad2, 
   Tv, 
   ExternalLink,
-  BookOpen,
+  Briefcase,
   Cpu,
   Award
 } from 'lucide-react';
@@ -54,7 +54,6 @@ export default function AboutTab() {
             <div className="relative p-1 bg-gradient-to-tr from-teal-600 to-emerald-500 rounded-full">
               <div className="bg-white p-1 rounded-full">
                 <div className="w-32 h-32 rounded-full overflow-hidden bg-slate-100 flex items-center justify-center">
-                  {/* Human avatar placeholder or pixel-stylized layout */}
                   <img 
                     src={personalInfo.avatarUrl} 
                     alt={personalInfo.name}
@@ -106,7 +105,7 @@ export default function AboutTab() {
         <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm" id="links-card">
           <h3 className="text-sm font-semibold text-slate-800 uppercase tracking-wider mb-4 flex items-center gap-2">
             <ExternalLink className="w-4 h-4 text-teal-600" />
-            Interactive Links
+            Links
           </h3>
           <div className="grid grid-cols-2 gap-3" id="links-grid">
             {socialLinks.map((link) => (
@@ -126,38 +125,8 @@ export default function AboutTab() {
         </div>
       </div>
 
-      {/* Right Column: Academic & Research Experience */}
+      {/* Right Column: Academic & Professional History */}
       <div className="lg:col-span-7 flex flex-col gap-6" id="academic-history">
-        {/* Academic Profile & Interests */}
-        <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
-          <h3 className="text-lg font-bold text-slate-900 tracking-tight border-b border-slate-100 pb-3 mb-4 flex items-center gap-2">
-            <BookOpen className="w-5 h-5 text-teal-600" />
-            Academic Profile & Interests
-          </h3>
-          <p className="text-sm text-slate-600 leading-relaxed mb-4">
-            As part of my Master's studies, I am particularly interested in the intersections of software architecture analysis and intelligent computing models. I am actively researching ways to streamline dependency trees, predict package drift, and deploy artificial models to configure server environments automatically.
-          </p>
-          <div className="flex flex-wrap gap-2" id="interest-tags">
-            {[
-              'Reinforcement Learning',
-              'Deep Neural Networks',
-              'Software Evolution',
-              'Microservice Architectures',
-              'Dependency Analysis',
-              '2D Pixel Art Animation',
-              'Retro Game Physics Engine',
-              'WebAssembly & C++'
-            ].map((tag) => (
-              <span 
-                key={tag} 
-                className="bg-slate-50 text-slate-700 border border-slate-200/60 px-3 py-1 rounded-full text-xs font-medium hover:border-teal-300 hover:bg-teal-50/30 transition-colors"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-        </div>
-
         {/* Education Timeline */}
         <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
           <h3 className="text-lg font-bold text-slate-900 tracking-tight border-b border-slate-100 pb-3 mb-4 flex items-center gap-2">
@@ -189,48 +158,34 @@ export default function AboutTab() {
           </div>
         </div>
 
-        {/* Technical Highlights Section */}
+        {/* Experience Timeline */}
         <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
-          <h3 className="text-lg font-bold text-slate-900 tracking-tight border-b border-slate-100 pb-3 mb-4">
-            Technical Skillset Matrix
+          <h3 className="text-lg font-bold text-slate-900 tracking-tight border-b border-slate-100 pb-3 mb-4 flex items-center gap-2">
+            <Briefcase className="w-5 h-5 text-teal-600" />
+            Experience
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm" id="skills-matrix">
-            <div className="border border-slate-100 rounded-xl p-4 bg-slate-50/50">
-              <h4 className="font-semibold text-slate-800 mb-2 flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-teal-500"></span>
-                AI & Deep Learning
-              </h4>
-              <p className="text-slate-500 text-xs leading-relaxed">
-                PyTorch, Stable-Baselines3, Gym/Gymnasium, Neural Networks inference engines, DQN, PPO algorithms, data modeling & D3 analytics.
-              </p>
-            </div>
-            <div className="border border-slate-100 rounded-xl p-4 bg-slate-50/50">
-              <h4 className="font-semibold text-slate-800 mb-2 flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-teal-500"></span>
-                Game Dev & Graphics
-              </h4>
-              <p className="text-slate-500 text-xs leading-relaxed">
-                C++, WebAssembly, pixel art design (Aseprite), sprite sheets, particle assets, retro platformer physics, sound cues, and canvas loops.
-              </p>
-            </div>
-            <div className="border border-slate-100 rounded-xl p-4 bg-slate-50/50">
-              <h4 className="font-semibold text-slate-800 mb-2 flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-teal-500"></span>
-                Software Engineering
-              </h4>
-              <p className="text-slate-500 text-xs leading-relaxed">
-                TypeScript, React, Node.js, Git, automated dependency resolution, dependency parsing, package changeset parsing, CI/CD pipelines.
-              </p>
-            </div>
-            <div className="border border-slate-100 rounded-xl p-4 bg-slate-50/50">
-              <h4 className="font-semibold text-slate-800 mb-2 flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-teal-500"></span>
-                Academic Research
-              </h4>
-              <p className="text-slate-500 text-xs leading-relaxed">
-                Empirical software studies, fault injection, autonomic systems adaptation, BibTeX reference compilation, academic document structures.
-              </p>
-            </div>
+          <div className="relative border-l-2 border-slate-100 pl-6 ml-2 flex flex-col gap-8 py-2" id="experience-timeline">
+            {experienceHistory.map((exp, idx) => (
+              <div key={idx} className="relative group" id={`exp-item-${idx}`}>
+                {/* Timeline node */}
+                <div className="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-white border-2 border-teal-500 group-hover:bg-teal-500 transition-colors duration-300" />
+                
+                <div>
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+                    <h4 className="font-bold text-slate-800 text-base">{exp.role}</h4>
+                    <span className="text-xs font-semibold text-teal-600 bg-teal-50 px-2.5 py-0.5 rounded-full inline-block self-start sm:self-center">
+                      {exp.period}
+                    </span>
+                  </div>
+                  <p className="text-slate-600 text-sm font-medium mt-1">{exp.company}</p>
+                  {exp.description && (
+                    <p className="text-slate-500 text-sm leading-relaxed mt-2 bg-slate-50 p-3 rounded-lg border border-slate-100">
+                      {exp.description}
+                    </p>
+                  )}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
