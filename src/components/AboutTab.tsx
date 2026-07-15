@@ -14,7 +14,6 @@ import {
   Award
 } from 'lucide-react';
 
-// Dynamic icon resolver for social links
 const getIcon = (name: string) => {
   switch (name) {
     case 'LinkedIn':
@@ -47,10 +46,8 @@ export default function AboutTab() {
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8" id="about-tab">
       {/* Left Column: Personal Card & Links */}
       <div className="lg:col-span-5 flex flex-col gap-6" id="about-sidebar">
-        {/* Added transform-gpu to prevent GPU rasterization bugs */}
-        <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm transition-shadow duration-300 hover:shadow-md transform-gpu" id="profile-card">
+        <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm isolate overflow-hidden" id="profile-card">
           <div className="flex flex-col items-center text-center gap-4">
-            {/* Avatar with stylized double frame */}
             <div className="relative p-1 bg-gradient-to-tr from-teal-600 to-emerald-500 rounded-full">
               <div className="bg-white p-1 rounded-full">
                 <div className="w-32 h-32 rounded-full overflow-hidden bg-slate-100 flex items-center justify-center">
@@ -73,7 +70,6 @@ export default function AboutTab() {
               </p>
             </div>
 
-            {/* Quick Contact Badges */}
             <div className="flex flex-col gap-2 w-full mt-4 border-t border-b border-slate-100 py-4 text-left text-sm text-slate-600">
               <div className="flex items-center gap-3">
                 <MapPin className="w-4 h-4 text-slate-400 shrink-0" />
@@ -81,7 +77,7 @@ export default function AboutTab() {
               </div>
               <button 
                 onClick={copyEmail}
-                className="flex items-center gap-3 group hover:text-teal-600 transition-colors cursor-pointer text-left w-full overflow-hidden"
+                className="flex items-center gap-3 group hover:text-teal-600 transition-colors duration-200 cursor-pointer text-left w-full overflow-hidden"
               >
                 <Mail className="w-4 h-4 text-slate-400 group-hover:text-teal-500 shrink-0" />
                 <span className="truncate flex-1">{personalInfo.email}</span>
@@ -91,16 +87,14 @@ export default function AboutTab() {
               </button>
             </div>
 
-            {/* Profile Bio Details */}
             <div className="text-left text-sm text-slate-600 leading-relaxed mt-2">
               <p className="whitespace-pre-line">{personalInfo.bio}</p>
             </div>
           </div>
         </div>
 
-        {/* Links Grid Section */}
-        {/* Added transform-gpu to force independent layer compositing */}
-        <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm transform-gpu" id="links-card">
+        {/* Links Card */}
+        <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm isolate overflow-hidden" id="links-card">
           <h3 className="text-sm font-semibold text-slate-800 uppercase tracking-wider mb-4 flex items-center gap-2">
             <ExternalLink className="w-4 h-4 text-teal-600" />
             Links
@@ -109,8 +103,8 @@ export default function AboutTab() {
             {socialLinks.map((link) => {
               const isGithub = link.name === 'GitHub';
               const linkClasses = isGithub
-                ? 'bg-white text-slate-800 border-slate-200 hover:bg-slate-900 hover:border-slate-900 hover:text-white'
-                : link.colorClass || 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50';
+                ? 'bg-white text-slate-800 border-slate-200 sm:hover:bg-slate-900 sm:hover:border-slate-900 sm:hover:text-white'
+                : link.colorClass || 'bg-white text-slate-700 border-slate-200 sm:hover:bg-slate-50';
 
               return (
                 <a
@@ -118,8 +112,7 @@ export default function AboutTab() {
                   href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  {/* Switched from transition-all to transition-colors to simplify rendering pipeline */}
-                  className={`flex items-center gap-2.5 px-4 py-3 border rounded-xl text-sm font-medium transition-colors duration-300 transform-gpu ${linkClasses}`}
+                  className={`flex items-center gap-2.5 px-4 py-3 border rounded-xl text-sm font-medium transition-none sm:transition-colors sm:duration-200 ${linkClasses}`}
                   id={`link-btn-${link.name.toLowerCase()}`}
                 >
                   {getIcon(link.name)}
@@ -133,8 +126,7 @@ export default function AboutTab() {
 
       {/* Right Column: Academic & Professional History */}
       <div className="lg:col-span-7 flex flex-col gap-6" id="academic-history">
-        {/* Education Timeline */}
-        <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm transform-gpu">
+        <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm isolate overflow-hidden">
           <h3 className="text-lg font-bold text-slate-900 tracking-tight border-b border-slate-100 pb-3 mb-4 flex items-center gap-2">
             <Award className="w-5 h-5 text-teal-600" />
             Education Timeline
@@ -142,8 +134,7 @@ export default function AboutTab() {
           <div className="relative border-l-2 border-slate-100 pl-6 ml-2 flex flex-col gap-8 py-2" id="timeline">
             {educationHistory.map((edu, idx) => (
               <div key={idx} className="relative group" id={`edu-item-${idx}`}>
-                {/* Timeline node */}
-                <div className="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-white border-2 border-teal-500 group-hover:bg-teal-500 transition-colors duration-300" />
+                <div className="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-white border-2 border-teal-500 sm:group-hover:bg-teal-500 sm:transition-colors sm:duration-200" />
                 
                 <div>
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
@@ -164,8 +155,7 @@ export default function AboutTab() {
           </div>
         </div>
 
-        {/* Experience Timeline */}
-        <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm transform-gpu">
+        <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm isolate overflow-hidden">
           <h3 className="text-lg font-bold text-slate-900 tracking-tight border-b border-slate-100 pb-3 mb-4 flex items-center gap-2">
             <Briefcase className="w-5 h-5 text-teal-600" />
             Experience
@@ -173,8 +163,7 @@ export default function AboutTab() {
           <div className="relative border-l-2 border-slate-100 pl-6 ml-2 flex flex-col gap-8 py-2" id="experience-timeline">
             {experienceHistory.map((exp, idx) => (
               <div key={idx} className="relative group" id={`exp-item-${idx}`}>
-                {/* Timeline node */}
-                <div className="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-white border-2 border-teal-500 group-hover:bg-teal-500 transition-colors duration-300" />
+                <div className="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-white border-2 border-teal-500 sm:group-hover:bg-teal-500 sm:transition-colors sm:duration-200" />
                 
                 <div>
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
