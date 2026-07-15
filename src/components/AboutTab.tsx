@@ -48,7 +48,7 @@ export default function AboutTab() {
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8" id="about-tab">
       {/* Left Column: Personal Card & Links */}
       <div className="lg:col-span-5 flex flex-col gap-6" id="about-sidebar">
-        <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm transition-all duration-300 hover:shadow-md" id="profile-card">
+        <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm transition-all-colors duration-300 hover:shadow-md" id="profile-card">
           <div className="flex flex-col items-center text-center gap-4">
             {/* Avatar with stylized double frame */}
             <div className="relative p-1 bg-gradient-to-tr from-teal-600 to-emerald-500 rounded-full">
