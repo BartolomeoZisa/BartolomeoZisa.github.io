@@ -88,7 +88,7 @@ export default function App() {
             </div>
 
             {/* Desktop Navigation Tabs */}
-            <nav className="flex items-center overflow-x-auto gap-1 py-1 no-scrollbar -mx-4 px-4 md:mx-0 md:px-0" id="navigation-tabs">
+            <nav className="flex items-center overflow-x-auto gap-1 py-1 no-scrollbar touch-pan-x -mx-4 px-4 md:mx-0 md:px-0" id="navigation-tabs">
               {tabsList.map((tab) => (
                 <button
                   key={tab.id}
