@@ -18,20 +18,20 @@ import {
 const getIcon = (name: string) => {
   switch (name) {
     case 'LinkedIn':
-      return <Linkedin className="w-5 h-5" />;
+      return <Linkedin className="w-5 h-5 shrink-0" />;
     case 'GitHub':
       // fill-current ensures the logo remains solid and takes on the text color
-      return <Github className="w-5 h-5 fill-current" />;
+      return <Github className="w-5 h-5 shrink-0 fill-current" />;
     case 'Instagram':
-      return <Instagram className="w-5 h-5" />;
+      return <Instagram className="w-5 h-5 shrink-0" />;
     case 'Itch.io':
-      return <Gamepad2 className="w-5 h-5" />;
+      return <Gamepad2 className="w-5 h-5 shrink-0" />;
     case 'Newgrounds':
-      return <Tv className="w-5 h-5" />;
+      return <Tv className="w-5 h-5 shrink-0" />;
     case 'Email':
-      return <Mail className="w-5 h-5" />;
+      return <Mail className="w-5 h-5 shrink-0" />;
     default:
-      return <ExternalLink className="w-5 h-5" />;
+      return <ExternalLink className="w-5 h-5 shrink-0" />;
   }
 };
 
@@ -76,16 +76,16 @@ export default function AboutTab() {
             {/* Quick Contact Badges */}
             <div className="flex flex-col gap-2 w-full mt-4 border-t border-b border-slate-100 py-4 text-left text-sm text-slate-600">
               <div className="flex items-center gap-3">
-                <MapPin className="w-4 h-4 text-slate-400" />
+                <MapPin className="w-4 h-4 text-slate-400 shrink-0" />
                 <span>{personalInfo.location}</span>
               </div>
               <button 
                 onClick={copyEmail}
-                className="flex items-center gap-3 group hover:text-teal-600 transition-colors cursor-pointer text-left w-full"
+                className="flex items-center gap-3 group hover:text-teal-600 transition-colors cursor-pointer text-left w-full overflow-hidden"
               >
-                <Mail className="w-4 h-4 text-slate-400 group-hover:text-teal-500" />
+                <Mail className="w-4 h-4 text-slate-400 group-hover:text-teal-500 shrink-0" />
                 <span className="truncate flex-1">{personalInfo.email}</span>
-                <span className="text-[10px] bg-slate-100 text-slate-500 px-1.5 py-0.5 rounded group-hover:bg-teal-50 group-hover:text-teal-600 transition-colors">
+                <span className="text-[10px] bg-slate-100 text-slate-500 px-1.5 py-0.5 rounded group-hover:bg-teal-50 group-hover:text-teal-600 transition-colors shrink-0">
                   {copied ? 'Copied!' : 'Copy'}
                 </span>
               </button>
@@ -104,7 +104,8 @@ export default function AboutTab() {
             <ExternalLink className="w-4 h-4 text-teal-600" />
             Links
           </h3>
-          <div className="grid grid-cols-2 gap-3" id="links-grid">
+          {/* Fixed mobile layout: 1 column on mobile, 2 columns on small screens and up */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3" id="links-grid">
             {socialLinks.map((link) => {
               // GitHub defaults to clear/white, but on hover/select turns deep slate with white text for maximum contrast
               const isGithub = link.name === 'GitHub';
@@ -122,7 +123,7 @@ export default function AboutTab() {
                   id={`link-btn-${link.name.toLowerCase()}`}
                 >
                   {getIcon(link.name)}
-                  <span>{link.name}</span>
+                  <span className="truncate">{link.name}</span>
                 </a>
               );
             })}
