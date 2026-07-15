@@ -20,7 +20,6 @@ const getIcon = (name: string) => {
     case 'LinkedIn':
       return <Linkedin className="w-5 h-5 shrink-0" />;
     case 'GitHub':
-      // fill-current ensures the logo remains solid and takes on the text color
       return <Github className="w-5 h-5 shrink-0 fill-current" />;
     case 'Instagram':
       return <Instagram className="w-5 h-5 shrink-0" />;
@@ -48,7 +47,8 @@ export default function AboutTab() {
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8" id="about-tab">
       {/* Left Column: Personal Card & Links */}
       <div className="lg:col-span-5 flex flex-col gap-6" id="about-sidebar">
-        <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm transition-all-colors duration-300 hover:shadow-md" id="profile-card">
+        {/* Added transform-gpu to prevent GPU rasterization bugs */}
+        <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm transition-shadow duration-300 hover:shadow-md transform-gpu" id="profile-card">
           <div className="flex flex-col items-center text-center gap-4">
             {/* Avatar with stylized double frame */}
             <div className="relative p-1 bg-gradient-to-tr from-teal-600 to-emerald-500 rounded-full">
@@ -99,15 +99,14 @@ export default function AboutTab() {
         </div>
 
         {/* Links Grid Section */}
-        <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm" id="links-card">
+        {/* Added transform-gpu to force independent layer compositing */}
+        <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm transform-gpu" id="links-card">
           <h3 className="text-sm font-semibold text-slate-800 uppercase tracking-wider mb-4 flex items-center gap-2">
             <ExternalLink className="w-4 h-4 text-teal-600" />
             Links
           </h3>
-          {/* Fixed mobile layout: 1 column on mobile, 2 columns on small screens and up */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3" id="links-grid">
             {socialLinks.map((link) => {
-              // GitHub defaults to clear/white, but on hover/select turns deep slate with white text for maximum contrast
               const isGithub = link.name === 'GitHub';
               const linkClasses = isGithub
                 ? 'bg-white text-slate-800 border-slate-200 hover:bg-slate-900 hover:border-slate-900 hover:text-white'
@@ -119,7 +118,8 @@ export default function AboutTab() {
                   href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`flex items-center gap-2.5 px-4 py-3 border rounded-xl text-sm font-medium transition-all duration-300 ${linkClasses}`}
+                  {/* Switched from transition-all to transition-colors to simplify rendering pipeline */}
+                  className={`flex items-center gap-2.5 px-4 py-3 border rounded-xl text-sm font-medium transition-colors duration-300 transform-gpu ${linkClasses}`}
                   id={`link-btn-${link.name.toLowerCase()}`}
                 >
                   {getIcon(link.name)}
@@ -134,7 +134,7 @@ export default function AboutTab() {
       {/* Right Column: Academic & Professional History */}
       <div className="lg:col-span-7 flex flex-col gap-6" id="academic-history">
         {/* Education Timeline */}
-        <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+        <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm transform-gpu">
           <h3 className="text-lg font-bold text-slate-900 tracking-tight border-b border-slate-100 pb-3 mb-4 flex items-center gap-2">
             <Award className="w-5 h-5 text-teal-600" />
             Education Timeline
@@ -165,7 +165,7 @@ export default function AboutTab() {
         </div>
 
         {/* Experience Timeline */}
-        <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+        <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm transform-gpu">
           <h3 className="text-lg font-bold text-slate-900 tracking-tight border-b border-slate-100 pb-3 mb-4 flex items-center gap-2">
             <Briefcase className="w-5 h-5 text-teal-600" />
             Experience
