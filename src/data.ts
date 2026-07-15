@@ -185,16 +185,6 @@ export const projects: Project[] = [
 
 export const games: Game[] = [
   {
-    id: 'game-1',
-    title: 'Marta',
-    description: 'A graduation visual novel in Italian',
-    type: 'Game',
-    platform: 'Itch.io',
-    platformUrl: 'https://bartholomheow.itch.io/marta',
-    tags: ['Visual Novel', 'Narrative', 'Renpy'],
-    imageUrl: 'https://img.itch.zone/aW1nLzI0NDIwNTE5LnBuZw==/315x250%23c/GXqWoQ.png'
-  },
-  {
     id: 'game-2',
     title: 'Inverted Merge',
     description: 'A puzzle game. Reconnect with your doppelganger who has inverted controls!',

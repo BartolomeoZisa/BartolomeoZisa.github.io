@@ -10,42 +10,15 @@ import {
   ExternalLink,
   Cpu,
   Layers,
-  Wrench,
-  Settings,
-  Video,
-  Image,
-  Trash2,
-  X
+  Wrench
 } from 'lucide-react';
 
 export default function ProjectsTab() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<'All' | 'AI' | 'Software Engineering' | 'Tools'>('All');
-  
-  // Media customization states
-  const [mediaOverrides, setMediaOverrides] = useState<{ [id: string]: { imageUrl?: string; videoUrl?: string } }>(() => {
-    const saved = localStorage.getItem('portfolio_projects_media');
-    return saved ? JSON.parse(saved) : {};
-  });
-  
-  const [editingProject, setEditingProject] = useState<Project | null>(null);
-  const [imageUrlInput, setImageUrlInput] = useState('');
-  const [videoUrlInput, setVideoUrlInput] = useState('');
-
-  // Merge static projects with custom media overrides
-  const activeProjects = useMemo(() => {
-    return projects.map((proj) => {
-      const override = mediaOverrides[proj.id];
-      return {
-        ...proj,
-        imageUrl: override?.imageUrl !== undefined ? override.imageUrl : proj.imageUrl,
-        videoUrl: override?.videoUrl !== undefined ? override.videoUrl : proj.videoUrl,
-      };
-    });
-  }, [mediaOverrides]);
 
   const filteredProjects = useMemo(() => {
-    return activeProjects.filter((project) => {
+    return projects.filter((project) => {
       const matchesSearch = 
         project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         project.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -56,7 +29,7 @@ export default function ProjectsTab() {
 
       return matchesSearch && matchesCategory;
     });
-  }, [searchTerm, selectedCategory, activeProjects]);
+  }, [searchTerm, selectedCategory]);
 
   const getCategoryIcon = (category: string) => {
     switch (category) {
@@ -69,35 +42,6 @@ export default function ProjectsTab() {
       default:
         return <Cpu className="w-4 h-4 text-teal-600" />;
     }
-  };
-
-  const handleOpenConfigure = (project: Project) => {
-    setEditingProject(project);
-    setImageUrlInput(project.imageUrl || '');
-    setVideoUrlInput(project.videoUrl || '');
-  };
-
-  const handleSaveMedia = () => {
-    if (!editingProject) return;
-    const updated = {
-      ...mediaOverrides,
-      [editingProject.id]: {
-        imageUrl: imageUrlInput.trim(),
-        videoUrl: videoUrlInput.trim()
-      }
-    };
-    setMediaOverrides(updated);
-    localStorage.setItem('portfolio_projects_media', JSON.stringify(updated));
-    setEditingProject(null);
-  };
-
-  const handleClearMedia = () => {
-    if (!editingProject) return;
-    const updated = { ...mediaOverrides };
-    delete updated[editingProject.id];
-    setMediaOverrides(updated);
-    localStorage.setItem('portfolio_projects_media', JSON.stringify(updated));
-    setEditingProject(null);
   };
 
   return (
@@ -201,15 +145,6 @@ export default function ProjectsTab() {
                   <span className="text-slate-700">{project.category}</span>
                 </div>
 
-                {/* Configure Media Overlay Button */}
-                <button
-                  onClick={() => handleOpenConfigure(project)}
-                  className="absolute top-3 right-3 p-1.5 bg-slate-900/85 hover:bg-slate-900 border border-slate-700/60 text-slate-200 hover:text-teal-400 rounded-lg backdrop-blur-xs transition-all flex items-center gap-1 text-[10px] font-bold shadow-xs z-10 cursor-pointer"
-                  title="Configure card image/video URL"
-                >
-                  <Settings className="w-3.5 h-3.5" />
-                  <span>Customize Media</span>
-                </button>
               </div>
 
               {/* Card Body */}
@@ -277,96 +212,6 @@ export default function ProjectsTab() {
           >
             Clear Search Filters
           </button>
-        </div>
-      )}
-
-      {/* Media Configuration Modal Overlay */}
-      {editingProject && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs animate-fade-in">
-          <div className="bg-white border border-slate-250 w-full max-w-lg rounded-2xl shadow-xl flex flex-col overflow-hidden max-h-[90vh]">
-            {/* Modal Header */}
-            <div className="bg-slate-50 border-b border-slate-150 p-4 flex items-center justify-between">
-              <h4 className="font-bold text-slate-900 flex items-center gap-2">
-                <Settings className="w-5 h-5 text-teal-600" />
-                Customize Card Media
-              </h4>
-              <button 
-                onClick={() => setEditingProject(null)}
-                className="p-1 hover:bg-slate-200 text-slate-500 hover:text-slate-800 rounded-lg transition-colors cursor-pointer"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            {/* Modal Body */}
-            <div className="p-6 flex flex-col gap-4 overflow-y-auto">
-              <div>
-                <span className="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1">Target Repository</span>
-                <span className="font-mono text-sm font-semibold text-slate-700">github.com/BartolomeoZisa/{editingProject.title}</span>
-              </div>
-
-              <p className="text-xs text-slate-500 leading-relaxed bg-slate-50 rounded-lg p-3 border border-slate-150">
-                Provide custom image or direct mp4/gif video links to display in the card preview header. These properties are persisted locally in your browser cache.
-              </p>
-
-              {/* Image URL Input */}
-              <div className="flex flex-col gap-1.5">
-                <label className="text-xs font-bold text-slate-700 flex items-center gap-1.5">
-                  <Image className="w-3.5 h-3.5 text-teal-600" />
-                  Image URL
-                </label>
-                <input 
-                  type="url"
-                  placeholder="https://example.com/screenshot.png"
-                  value={imageUrlInput}
-                  onChange={(e) => setImageUrlInput(e.target.value)}
-                  className="w-full bg-white border border-slate-250 rounded-xl py-2 px-3 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-teal-500"
-                />
-              </div>
-
-              {/* Video URL Input */}
-              <div className="flex flex-col gap-1.5">
-                <label className="text-xs font-bold text-slate-700 flex items-center gap-1.5">
-                  <Video className="w-3.5 h-3.5 text-teal-600" />
-                  Video / GIF URL (Direct MP4, WebM or GIF)
-                </label>
-                <input 
-                  type="url"
-                  placeholder="https://example.com/gameplay.mp4"
-                  value={videoUrlInput}
-                  onChange={(e) => setVideoUrlInput(e.target.value)}
-                  className="w-full bg-white border border-slate-250 rounded-xl py-2 px-3 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-teal-500"
-                />
-              </div>
-            </div>
-
-            {/* Modal Footer */}
-            <div className="bg-slate-50 border-t border-slate-150 p-4 flex items-center justify-between gap-3">
-              <button
-                onClick={handleClearMedia}
-                className="inline-flex items-center gap-1.5 px-3 py-2 border border-rose-200 text-rose-600 hover:bg-rose-50 rounded-xl text-xs font-bold transition-all cursor-pointer"
-                title="Reset this card to use default images or placeholders"
-              >
-                <Trash2 className="w-3.5 h-3.5" />
-                Clear Overrides
-              </button>
-
-              <div className="flex items-center gap-2">
-                <button
-                  onClick={() => setEditingProject(null)}
-                  className="px-4 py-2 border border-slate-200 hover:bg-slate-100 text-slate-600 hover:text-slate-850 rounded-xl text-xs font-bold transition-all cursor-pointer"
-                >
-                  Cancel
-                </button>
-                <button
-                  onClick={handleSaveMedia}
-                  className="px-4 py-2 bg-teal-600 hover:bg-teal-700 text-white rounded-xl text-xs font-bold shadow-xs transition-all cursor-pointer"
-                >
-                  Save Settings
-                </button>
-              </div>
-            </div>
-          </div>
         </div>
       )}
     </div>

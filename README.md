@@ -9,7 +9,7 @@ Live at https://BartolomeoZisa.github.io/
 - **Interactive Links Grid**: Beautiful styled components with Lucide icons for GitHub, LinkedIn, Itch.io, Instagram, Newgrounds, and Email.
 - **Academic Coordinates & Projects**: Detailed timeline tracking B.Sc. and M.Sc. milestones, core interests, and research directions.
 - **GitHub Projects Showcase**: Filterable and searchable grid demonstrating custom C++ game engines, AI reinforcement learning agents, and TypeScript tooling.
-- **Indie Games & Asset Packs**: Filterable showcase featuring custom games (*Marta*, *Inverted Merge*, *Programming Escape*, *Treant Killer*, *Brainrot Destruction*) and pixel art asset packs directly linking to Itch.io and Newgrounds.
+- **Indie Games & Asset Packs**: Filterable showcase featuring custom games (*Inverted Merge*, *Programming Escape*, *Treant Killer*, *Brainrot Destruction*) and pixel art asset packs directly linking to Itch.io and Newgrounds.
 - **Peer-Reviewed Publications**: Deep-dive card showcasing the co-authored SANER 2026 conference paper, complete with an interactive copyable BibTeX citation drawer.
 
 ---

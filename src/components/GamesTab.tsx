@@ -8,12 +8,7 @@ import {
   Filter, 
   ExternalLink,
   Layers,
-  Heart,
-  Settings,
-  Video,
-  Image,
-  Trash2,
-  X
+  Heart
 } from 'lucide-react';
 
 export default function GamesTab() {
@@ -21,30 +16,8 @@ export default function GamesTab() {
   const [selectedType, setSelectedType] = useState<'All' | 'Game' | 'Asset Pack'>('All');
   const [selectedPlatform, setSelectedPlatform] = useState<'All' | 'Itch.io' | 'Newgrounds'>('All');
 
-  // Media customization states
-  const [mediaOverrides, setMediaOverrides] = useState<{ [id: string]: { imageUrl?: string; videoUrl?: string } }>(() => {
-    const saved = localStorage.getItem('portfolio_games_media');
-    return saved ? JSON.parse(saved) : {};
-  });
-
-  const [editingGame, setEditingGame] = useState<Game | null>(null);
-  const [imageUrlInput, setImageUrlInput] = useState('');
-  const [videoUrlInput, setVideoUrlInput] = useState('');
-
-  // Merge static games with custom overrides
-  const activeGames = useMemo(() => {
-    return games.map((game) => {
-      const override = mediaOverrides[game.id];
-      return {
-        ...game,
-        imageUrl: override?.imageUrl !== undefined ? override.imageUrl : game.imageUrl,
-        videoUrl: override?.videoUrl !== undefined ? override.videoUrl : game.videoUrl,
-      };
-    });
-  }, [mediaOverrides]);
-
   const filteredGames = useMemo(() => {
-    return activeGames.filter((game) => {
+    return games.filter((game) => {
       const matchesSearch = 
         game.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         game.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -58,36 +31,7 @@ export default function GamesTab() {
 
       return matchesSearch && matchesType && matchesPlatform;
     });
-  }, [searchTerm, selectedType, selectedPlatform, activeGames]);
-
-  const handleOpenConfigure = (game: Game) => {
-    setEditingGame(game);
-    setImageUrlInput(game.imageUrl || '');
-    setVideoUrlInput(game.videoUrl || '');
-  };
-
-  const handleSaveMedia = () => {
-    if (!editingGame) return;
-    const updated = {
-      ...mediaOverrides,
-      [editingGame.id]: {
-        imageUrl: imageUrlInput.trim(),
-        videoUrl: videoUrlInput.trim()
-      }
-    };
-    setMediaOverrides(updated);
-    localStorage.setItem('portfolio_games_media', JSON.stringify(updated));
-    setEditingGame(null);
-  };
-
-  const handleClearMedia = () => {
-    if (!editingGame) return;
-    const updated = { ...mediaOverrides };
-    delete updated[editingGame.id];
-    setMediaOverrides(updated);
-    localStorage.setItem('portfolio_games_media', JSON.stringify(updated));
-    setEditingGame(null);
-  };
+  }, [searchTerm, selectedType, selectedPlatform]);
 
   return (
     <div className="flex flex-col gap-6 animate-fade-in" id="games-tab">
@@ -220,15 +164,6 @@ export default function GamesTab() {
                   </span>
                 </div>
 
-                {/* Configure Media Overlay Button */}
-                <button
-                  onClick={() => handleOpenConfigure(game)}
-                  className="absolute top-3 right-3 p-1.5 bg-slate-900/85 hover:bg-slate-900 border border-slate-750 text-slate-200 hover:text-rose-400 rounded-lg backdrop-blur-xs transition-all flex items-center gap-1 text-[10px] font-bold shadow-xs z-10 cursor-pointer"
-                  title="Configure game card media"
-                >
-                  <Settings className="w-3.5 h-3.5" />
-                  <span>Media</span>
-                </button>
               </div>
 
               {/* Body */}
@@ -290,94 +225,6 @@ export default function GamesTab() {
       )}
 
       {/* Media Configuration Modal Overlay */}
-      {editingGame && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs animate-fade-in">
-          <div className="bg-white border border-slate-250 w-full max-w-lg rounded-2xl shadow-xl flex flex-col overflow-hidden max-h-[90vh]">
-            {/* Modal Header */}
-            <div className="bg-slate-50 border-b border-slate-150 p-4 flex items-center justify-between">
-              <h4 className="font-bold text-slate-900 flex items-center gap-2">
-                <Settings className="w-5 h-5 text-rose-600 animate-spin-slow" />
-                Customize Game Media
-              </h4>
-              <button 
-                onClick={() => setEditingGame(null)}
-                className="p-1 hover:bg-slate-200 text-slate-500 hover:text-slate-800 rounded-lg transition-colors cursor-pointer"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            {/* Modal Body */}
-            <div className="p-6 flex flex-col gap-4 overflow-y-auto">
-              <div>
-                <span className="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1">Target Project</span>
-                <span className="font-sans text-sm font-bold text-slate-800">{editingGame.title} ({editingGame.type})</span>
-              </div>
-
-              <p className="text-xs text-slate-500 leading-relaxed bg-slate-50 rounded-lg p-3 border border-slate-150">
-                Provide custom image or direct mp4/webm/gif video links to display in the game card preview header. These properties are persisted locally in your browser cache.
-              </p>
-
-              {/* Image URL Input */}
-              <div className="flex flex-col gap-1.5">
-                <label className="text-xs font-bold text-slate-700 flex items-center gap-1.5">
-                  <Image className="w-3.5 h-3.5 text-rose-500" />
-                  Image URL
-                </label>
-                <input 
-                  type="url"
-                  placeholder="https://example.com/screenshot.png"
-                  value={imageUrlInput}
-                  onChange={(e) => setImageUrlInput(e.target.value)}
-                  className="w-full bg-white border border-slate-250 rounded-xl py-2 px-3 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-rose-500"
-                />
-              </div>
-
-              {/* Video URL Input */}
-              <div className="flex flex-col gap-1.5">
-                <label className="text-xs font-bold text-slate-700 flex items-center gap-1.5">
-                  <Video className="w-3.5 h-3.5 text-rose-500" />
-                  Video / GIF URL (Direct MP4, WebM or GIF)
-                </label>
-                <input 
-                  type="url"
-                  placeholder="https://example.com/gameplay.mp4"
-                  value={videoUrlInput}
-                  onChange={(e) => setVideoUrlInput(e.target.value)}
-                  className="w-full bg-white border border-slate-250 rounded-xl py-2 px-3 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-rose-500"
-                />
-              </div>
-            </div>
-
-            {/* Modal Footer */}
-            <div className="bg-slate-50 border-t border-slate-150 p-4 flex items-center justify-between gap-3">
-              <button
-                onClick={handleClearMedia}
-                className="inline-flex items-center gap-1.5 px-3 py-2 border border-rose-250 text-rose-600 hover:bg-rose-50 rounded-xl text-xs font-bold transition-all cursor-pointer"
-                title="Reset this card to use default images or placeholders"
-              >
-                <Trash2 className="w-3.5 h-3.5" />
-                Clear Overrides
-              </button>
-
-              <div className="flex items-center gap-2">
-                <button
-                  onClick={() => setEditingGame(null)}
-                  className="px-4 py-2 border border-slate-200 hover:bg-slate-100 text-slate-600 hover:text-slate-850 rounded-xl text-xs font-bold transition-all cursor-pointer"
-                >
-                  Cancel
-                </button>
-                <button
-                  onClick={handleSaveMedia}
-                  className="px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white rounded-xl text-xs font-bold shadow-xs transition-all cursor-pointer"
-                >
-                  Save Settings
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
