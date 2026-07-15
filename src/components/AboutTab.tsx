@@ -14,6 +14,7 @@ import {
   Award
 } from 'lucide-react';
 
+// Dynamic icon resolver for social links
 const getIcon = (name: string) => {
   switch (name) {
     case 'LinkedIn':
@@ -30,6 +31,26 @@ const getIcon = (name: string) => {
       return <Mail className="w-5 h-5 shrink-0" />;
     default:
       return <ExternalLink className="w-5 h-5 shrink-0" />;
+  }
+};
+
+// Safe, glitch-free style mapping for mobile vs desktop
+const getLinkStyles = (name: string) => {
+  switch (name) {
+    case 'LinkedIn':
+      return 'bg-white text-slate-700 border-slate-200 sm:hover:bg-blue-50 sm:hover:text-blue-600 sm:hover:border-blue-200';
+    case 'GitHub':
+      return 'bg-white text-slate-800 border-slate-200 sm:hover:bg-slate-900 sm:hover:border-slate-900 sm:hover:text-white';
+    case 'Instagram':
+      return 'bg-white text-slate-700 border-slate-200 sm:hover:bg-pink-50 sm:hover:text-pink-600 sm:hover:border-pink-200';
+    case 'Itch.io':
+      return 'bg-white text-slate-700 border-slate-200 sm:hover:bg-red-50 sm:hover:text-red-500 sm:hover:border-red-200';
+    case 'Newgrounds':
+      return 'bg-white text-slate-700 border-slate-200 sm:hover:bg-amber-50 sm:hover:text-amber-600 sm:hover:border-amber-200';
+    case 'Email':
+      return 'bg-white text-slate-700 border-slate-200 sm:hover:bg-teal-50 sm:hover:text-teal-600 sm:hover:border-teal-200';
+    default:
+      return 'bg-white text-slate-700 border-slate-200 sm:hover:bg-slate-50';
   }
 };
 
@@ -101,10 +122,7 @@ export default function AboutTab() {
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3" id="links-grid">
             {socialLinks.map((link) => {
-              const isGithub = link.name === 'GitHub';
-              const linkClasses = isGithub
-                ? 'bg-white text-slate-800 border-slate-200 sm:hover:bg-slate-900 sm:hover:border-slate-900 sm:hover:text-white'
-                : link.colorClass || 'bg-white text-slate-700 border-slate-200 sm:hover:bg-slate-50';
+              const linkClasses = getLinkStyles(link.name);
 
               return (
                 <a
