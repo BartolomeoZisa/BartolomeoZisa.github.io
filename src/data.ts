@@ -12,7 +12,7 @@ export const personalInfo = {
   university: 'University of Pisa',
   email: 'bartzisa03@gmail.com',
   location: 'Pisa, Italy',
-  bio: `I am a Master's Student in Artificial Intelligence at the University of Pisa and a passionate hobbyist game developer. I am interested in Deep Learning, Reinforcement Learning. In my free time I dabble in indie game development and pixel art creation.`,
+  bio: `I am a Master's Student in Artificial Intelligence at the University of Pisa and a hobbyist game developer. I am interested in Deep Learning, Reinforcement Learning and Software Engineering. In my free time I dabble in indie game development and pixel art creation.`,
   avatarUrl: 'https://media.licdn.com/dms/image/v2/D4D03AQF1Q2J5lktyeQ/profile-displayphoto-scale_400_400/B4DZeiVLKgGUAk-/0/1750775149751?e=1785974400&v=beta&t=-uIfaSVxZdS5GFSvxavdzgS2jBZH_9SVcnCneOXsEQ4',
 };
 
