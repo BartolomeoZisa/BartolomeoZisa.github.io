@@ -5,6 +5,7 @@ import digitalHealthImage from './assets/digitalhealth.png';
 import sokobanImage from './assets/sokoban.png';
 import avae from './assets/avae.png';
 import videoGeneratorImage from './assets/video.png';
+import myPictureImage from './assets/mypicture.jpg';
 
 export const personalInfo = {
   name: 'Bartolomeo Zisa',
@@ -13,7 +14,7 @@ export const personalInfo = {
   email: 'bartzisa03@gmail.com',
   location: 'Pisa, Italy',
   bio: `I am a Master's Student in Artificial Intelligence at the University of Pisa and a hobbyist game developer. I am interested in Deep Learning, Reinforcement Learning and Software Engineering. In my free time I dabble in indie game development and pixel art creation.`,
-  avatarUrl: 'src/assets/mypicture.jpg',
+  avatarUrl: myPictureImage,
 };
 
 // data.ts
